@@ -147,3 +147,11 @@ if (usesCodegen) {
 
 	tasks.withType(JavaCompile::class.java).configureEach { dependsOn(generateC15tSpec) }
 }
+
+configurations.configureEach {
+    if (name == "compileClasspath" || name == "runtimeClasspath"
+            || name.endsWith("CompileClasspath") || name.endsWith("RuntimeClasspath")) {
+        resolutionStrategy.activateDependencyLocking()
+    }
+}
+
