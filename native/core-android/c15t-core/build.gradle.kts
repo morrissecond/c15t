@@ -51,3 +51,11 @@ tasks.register<JavaExec>("bench") {
 	// One collector keeps the numbers comparable between runs.
 	jvmArgs = listOf("-XX:+UseSerialGC")
 }
+
+configurations.configureEach {
+    if (name == "compileClasspath" || name == "runtimeClasspath"
+            || name.endsWith("CompileClasspath") || name.endsWith("RuntimeClasspath")) {
+        resolutionStrategy.activateDependencyLocking()
+    }
+}
+
