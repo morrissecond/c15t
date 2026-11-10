@@ -393,10 +393,12 @@ export const mergeTranslationConfigs = function mergeTranslationConfigs(
 				continue;
 			}
 			const base = translations[lang] || translations.en;
-			translations[lang] = deepMergeTranslations(
-				base as Translations,
-				trans as Partial<Translations>
-			);
+			if (!["__proto__", "constructor", "prototype"].includes(lang)) {
+				translations[lang] = deepMergeTranslations(
+					base as Translations,
+					trans as Partial<Translations>
+				);
+			}
 		}
 	}
 
