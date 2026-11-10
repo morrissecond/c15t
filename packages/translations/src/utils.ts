@@ -393,7 +393,7 @@ export const mergeTranslationConfigs = function mergeTranslationConfigs(
 				continue;
 			}
 			const base = translations[lang] || translations.en;
-			if (!["__proto__", "constructor", "prototype"].includes(lang)) {
+			if (!["__proto__", "constructor", "prototype"].includes(lang) && typeof lang === 'string' && !lang.includes('__proto__') && !lang.includes('constructor') && !lang.includes('prototype')) {
 				translations[lang] = deepMergeTranslations(
 					base as Translations,
 					trans as Partial<Translations>
